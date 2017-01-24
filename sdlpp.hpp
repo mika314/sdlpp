@@ -87,7 +87,7 @@ namespace sdl
   auto callSdl(int (f)(Args2...), Args... args) -> decltype(f(args...))
   {
     auto r = f(args...);
-    if (r != 0)
+    if (r == -1)
     {
       throw Error("Error code: " + std::to_string(r) + " Error string: " + SDL_GetError());
     }
@@ -117,7 +117,6 @@ namespace sdl
   METHOD(getDisplayIndex, GetWindowDisplayIndex);       \
   METHOD(getDisplayMode, GetWindowDisplayMode);         \
   METHOD(getFlags, GetWindowFlags);                     \
-  METHOD(getFromID, GetWindowFromID);                   \
   METHOD(getGammaRamp, GetWindowGammaRamp);             \
   METHOD(getGrab, GetWindowGrab);                       \
   METHOD(getID, GetWindowID);                           \

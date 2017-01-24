@@ -39,7 +39,7 @@ sdl::Error
 
 #### glCreateContext
 ```c++
-SDL_GLContext glCreateContext()
+SDL_GLContext sdl::Window::glCreateContext()
 ```
 
 ##### Exceptions
@@ -47,7 +47,7 @@ sdl::Error
 
 #### glGetDrawableSize
 ```c++
-void glGetDrawableSize(int *w, int *h)
+void sdl::Window::glGetDrawableSize(int *w, int *h)
 ```
 
 ##### Function Parameters
@@ -58,78 +58,82 @@ void glGetDrawableSize(int *w, int *h)
 sdl::Error
 
 #### glMakeCurrent
+```c++
+int sdl::Window::glMakeCurrent(SDL_GLContext context)
+```
 
 ##### Function Parameters
-* 
+* context - 
 
 ##### Exceptions
 sdl::Error
 
 #### glSwap
-
-##### Function Parameters
-* 
-
-##### Exceptions
-sdl::Error
+```c++
+void sdl::Window::glSwap()
+```
 
 #### getBrightness
-
-##### Function Parameters
-* 
-
-##### Exceptions
-sdl::Error
+```c++
+float sdl::Window::getBrightness()
+```
 
 #### getData
+```c++
+void *sdl::Window::getData(const char *name, void *userdata)
+```
 
 ##### Function Parameters
-* 
+* name -
+* userdata -
 
 ##### Exceptions
 sdl::Error
 
 #### getDisplayIndex
-
-##### Function Parameters
-* 
+```c++
+int sdl::Window::getDisplayIndex()
+```
 
 ##### Exceptions
 sdl::Error
 
 #### getDisplayMode
+```c++
+int sdl::Window::getDisplayMode(SDL_DisplayMode *mode)
+```
 
 ##### Function Parameters
-* 
+* mode -
 
 ##### Exceptions
 sdl::Error
 
 #### getFlags
-
-##### Function Parameters
-* 
-
-##### Exceptions
-sdl::Error
-
-#### getFromID
-
-##### Function Parameters
-* 
+```c++
+Uint32 sdl::Window::getFlags()
+```
 
 ##### Exceptions
 sdl::Error
 
 #### getGammaRamp
+```c++
+int sdl::Window::getGammaRamp(Uint16 *red, Uint16 *green, Uint16 *blue)
+```
 
 ##### Function Parameters
-* 
+* red - A pointer to a 256 element array of 16-bit quantities to hold the translation table for the red channel, or nullptr.
+* green - A pointer to a 256 element array of 16-bit quantities to hold the translation table for the green channel, or nullptr.
+* blue - A pointer to a 256 element array of 16-bit quantities to hold the translation table for the blue channel, or nullptr.
 
 ##### Exceptions
 sdl::Error
 
 #### getGrab
+```c++
+sdl::Window::getGrab()
+```
 
 ##### Function Parameters
 * 
@@ -138,6 +142,9 @@ sdl::Error
 sdl::Error
 
 #### getID
+```c++
+sdl::Window::getID()
+```
 
 ##### Function Parameters
 * 
@@ -146,6 +153,9 @@ sdl::Error
 sdl::Error
 
 #### getMaximumSize
+```c++
+sdl::Window::getMaximumSize()
+```
 
 ##### Function Parameters
 * 
@@ -154,6 +164,9 @@ sdl::Error
 sdl::Error
 
 #### getMinimumSize
+```c++
+sdl::Window::getMinimumSize()
+```
 
 ##### Function Parameters
 * 
@@ -162,6 +175,9 @@ sdl::Error
 sdl::Error
 
 #### getPixelFormat
+```c++
+sdl::Window::getPixelFormat()
+```
 
 ##### Function Parameters
 * 
@@ -170,6 +186,9 @@ sdl::Error
 sdl::Error
 
 #### getPosition
+```c++
+sdl::Window::getPosition()
+```
 
 ##### Function Parameters
 * 
@@ -178,6 +197,9 @@ sdl::Error
 sdl::Error
 
 #### getSize
+```c++
+sdl::Window::getSize()
+```
 
 ##### Function Parameters
 * 
@@ -186,6 +208,9 @@ sdl::Error
 sdl::Error
 
 #### getSurface
+```c++
+sdl::Window::getSurface()
+```
 
 ##### Function Parameters
 * 
@@ -194,6 +219,9 @@ sdl::Error
 sdl::Error
 
 #### getTitle
+```c++
+sdl::Window::getTitle()
+```
 
 ##### Function Parameters
 * 
@@ -202,6 +230,9 @@ sdl::Error
 sdl::Error
 
 #### hide
+```c++
+sdl::Window::hide()
+```
 
 ##### Function Parameters
 * 
@@ -210,6 +241,9 @@ sdl::Error
 sdl::Error
 
 #### maximize
+```c++
+sdl::Window::maximize()
+```
 
 ##### Function Parameters
 * 
@@ -218,6 +252,9 @@ sdl::Error
 sdl::Error
 
 #### minimize
+```c++
+sdl::Window::minimize()
+```
 
 ##### Function Parameters
 * 
@@ -226,6 +263,9 @@ sdl::Error
 sdl::Error
 
 #### raise
+```c++
+sdl::Window::raise()
+```
 
 ##### Function Parameters
 * 
@@ -234,6 +274,9 @@ sdl::Error
 sdl::Error
 
 #### restore
+```c++
+sdl::Window::restore()
+```
 
 ##### Function Parameters
 * 
@@ -242,6 +285,9 @@ sdl::Error
 sdl::Error
 
 #### setBordered
+```c++
+sdl::Window::setBordered()
+```
 
 ##### Function Parameters
 * 
@@ -250,6 +296,9 @@ sdl::Error
 sdl::Error
 
 #### setBrightness
+```c++
+sdl::Window::setBrightness()
+```
 
 ##### Function Parameters
 * 
@@ -258,6 +307,9 @@ sdl::Error
 sdl::Error
 
 #### setData
+```c++
+sdl::Window::setData()
+```
 
 ##### Function Parameters
 * 
@@ -266,6 +318,9 @@ sdl::Error
 sdl::Error
 
 #### setDisplayMode
+```c++
+sdl::Window::setDisplayMode()
+```
 
 ##### Function Parameters
 * 
@@ -274,6 +329,9 @@ sdl::Error
 sdl::Error
 
 #### setFullscreen
+```c++
+sdl::Window::setFullscreen()
+```
 
 ##### Function Parameters
 * 
@@ -282,6 +340,9 @@ sdl::Error
 sdl::Error
 
 #### setGammaRamp
+```c++
+sdl::Window::setGammaRamp()
+```
 
 ##### Function Parameters
 * 
@@ -290,6 +351,9 @@ sdl::Error
 sdl::Error
 
 #### setGrab
+```c++
+sdl::Window::setGrab()
+```
 
 ##### Function Parameters
 * 
@@ -298,12 +362,18 @@ sdl::Error
 sdl::Error
 
 #### setHitTest
+```c++
+sdl::Window::setHitTest()
+```
 ##### Function Parameters
 * 
 ##### Exceptions
 sdl::Error
 
 #### setIcon
+```c++
+sdl::Window::setIcon()
+```
 
 ##### Function Parameters
 * 
@@ -312,6 +382,9 @@ sdl::Error
 sdl::Error
 
 #### setMaximumSize
+```c++
+sdl::Window::setMaximumSize()
+```
 
 ##### Function Parameters
 * 
@@ -320,6 +393,9 @@ sdl::Error
 sdl::Error
 
 #### setMinimumSize
+```c++
+sdl::Window::setMinimumSize()
+```
 
 ##### Function Parameters
 * 
@@ -328,6 +404,9 @@ sdl::Error
 sdl::Error
 
 #### setPosition
+```c++
+sdl::Window::setPosition()
+```
 
 ##### Function Parameters
 * 
@@ -335,6 +414,9 @@ sdl::Error
 sdl::Error
 
 #### setSize
+```c++
+sdl::Window::setSize()
+```
 
 ##### Function Parameters
 * 
@@ -343,6 +425,9 @@ sdl::Error
 sdl::Error
 
 #### setTitle
+```c++
+sdl::Window::setTitle()
+```
 
 ##### Function Parameters
 * 
@@ -351,6 +436,9 @@ sdl::Error
 sdl::Error
 
 #### show
+```c++
+sdl::Window::show()
+```
 
 ##### Function Parameters
 * 
@@ -359,6 +447,9 @@ sdl::Error
 sdl::Error
 
 #### updateSurface
+```c++
+sdl::Window::updateSurface()
+```
 
 ##### Function Parameters
 * 
@@ -367,6 +458,9 @@ sdl::Error
 sdl::Error
 
 #### updateSurfaceRects
+```c++
+sdl::Window::updateSurfaceRects()
+```
 
 ##### Function Parameters
 * 
