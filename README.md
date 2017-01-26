@@ -1,6 +1,8 @@
 # sdlpp
 Header only C++ wrapper for SDL2.
 
+[![C++ Wrapper for SDL2](https://img.youtube.com/vi/fD-bCQ20NRo/0.jpg)](https://www.youtube.com/watch?v=fD-bCQ20NRo)
+
 ## sdl::Init Class
 Defined in header `<sdlpp.hpp>`
 ### Public Functions
