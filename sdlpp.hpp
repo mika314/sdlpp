@@ -204,10 +204,83 @@ namespace sdl
   METHOD(updateYuv, UpdateYUVTexture);
   SDL_CLASS(Texture);
 
+  class Surface
+  {
+    void checkErrors()
+    {
+      if (!handle)
+      {
+        std::ostringstream strm;
+        strm << "Surface::Surface(): " << SDL_GetError();
+        throw Error(strm.str());
+      }
+    }
+  public:
+    Surface(Uint32 flags, int width, int height, int depth,
+            Uint32 Rmask, Uint32 Gmask, Uint32 Bmask, Uint32 Amask):
+      handle(SDL_CreateRGBSurface(flags, width, height, depth,
+                                  Rmask, Gmask, Bmask, Amask))
+    {
+      checkErrors();
+    }
+    Surface(SDL_RWops *src, int freesrc):
+      handle(SDL_LoadBMP_RW(src, freesrc))
+    {
+      checkErrors();
+    }
+    Surface(const std::string &file):
+      handle(SDL_LoadBMP(file.c_str()))
+    {
+      checkErrors();
+    }
+    Surface(SDL_Surface * src, const SDL_PixelFormat * fmt, Uint32 flags):
+      handle(SDL_ConvertSurface(src, fmt, flags))
+    {
+      checkErrors();
+    }
+    Surface(SDL_Surface * src, Uint32 pixel_format, Uint32 flags):
+      handle(SDL_ConvertSurfaceFormat(src, pixel_format, flags))
+    {
+      checkErrors();
+    }
+    Surface(SDL_Surface *handle): handle(handle)
+    {}
+    Surface(const Surface &) = delete;
+    Surface& operator=(const Surface &) = delete;
+    ~Surface()
+    {
+      SDL_FreeSurface(handle);
+    }
+    SDL_Surface *operator&()
+    {
+      return handle;
+    }
+    const SDL_Surface *operator&() const
+    {
+      return handle;
+    }
+  private:
+    SDL_Surface *handle;
+  public:
+    METHOD(setPalette, SetSurfacePalette);
+    METHOD(lock, LockSurface);
+    METHOD(unlock, UnlockSurface);
+    METHOD(setColorKey, SetColorKey);
+    METHOD(getColorKey, GetColorKey);
+    METHOD(setColorMode, SetSurfaceColorMod);
+    METHOD(getColorMode, GetSurfaceColorMod);
+    METHOD(setClipRect, SetClipRect);
+    METHOD(getClipRect, GetClipRect);
+    METHOD(fillRect, FillRect);
+    METHOD(fillRects, FillRects);
+    METHOD(blit, BlitSurface);
+    METHOD(softStretch, SoftStretch);
+    METHOD(blitScaled, BlitScaled);
+  };
+
   class Audio
   {
   public:
-    template <typename ...Args>
     Audio(const char *device,
           bool iscapture,
           const SDL_AudioSpec *desired,
