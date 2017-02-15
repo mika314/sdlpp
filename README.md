@@ -236,3 +236,7 @@ Example code:
 |SDL_WINDOWEVENT|windowEvent|
 
 Function poll() internally calls SDL_PollEvent and function wait() calls SDL_WaintEvent() or SDL_WaitEventTimeout().
+
+##Examples
+
+Go in the example directory examples/pong or examples/starfield and run make to build.
