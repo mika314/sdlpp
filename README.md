@@ -34,6 +34,8 @@ Also I mapped functions to methods.
 ## Window
 |Method|SDL2 function|
 |------|-------------|
+|ctor|SDL_CreateWindow|
+|dtor|SDL_DestroyWindow|
 |glCreateContext|SDL_GL_CreateContext|
 |glGetDrawableSize|SDL_GL_GetDrawableSize|
 |glMakeCurrent|SDL_GL_MakeCurrent|
@@ -79,6 +81,8 @@ Also I mapped functions to methods.
 ##Renderer
 |Method|SDL2 function|
 |------|-------------|
+|ctor|SDL_CreateRenderer|
+|dtor|SDL_DestroyRenderer|
 |getDrawBlendMode|SDL_GetRenderDrawBlendMode|
 |getDrawColor|SDL_GetRenderDrawColor|
 |getDriverInfo|SDL_GetRenderDriverInfo|
@@ -115,6 +119,9 @@ Also I mapped functions to methods.
 ##Texture
 |Method|SDL2 function|
 |------|-------------|
+|ctor|SDL_CreateTexture|
+|ctor|SDL_CreateTextureFromSurface|
+|dtor|SDL_DestroyRenderer|
 |glBind|SDL_GL_BindTexture|
 |glUnbind|SDL_GL_UnbindTexture|
 |getAlphaMod|SDL_GetTextureAlphaMod|
@@ -129,14 +136,14 @@ Also I mapped functions to methods.
 |update|SDL_UpdateTexture|
 |updateYuv|SDL_UpdateYUVTexture|
 
-Also Texture has overloaded constructor:
-```c++
-Texture(SDL_Renderer *renderer, SDL_Surface *surface);
-```
-
 ##Surface
 |Method|SDL2 function|
 |------|-------------|
+|ctor|SDL_CreateRGBSurface|
+|ctor|SDL_LoadBMP_RW|
+|ctor|SDL_LoadBMP|
+|ctor|SDL_ConvertSurface|
+|dtor|SDL_FreeSurface|
 |setPalette|SDL_SetSurfacePalette|
 |lock|SDL_LockSurface|
 |unlock|SDL_UnlockSurface|
@@ -152,18 +159,11 @@ Texture(SDL_Renderer *renderer, SDL_Surface *surface);
 |softStretch|SDL_SoftStretch|
 |blitScaled|SDL_BlitScaled|
 
-Surface also has multiple overloaded constructors:
-```c++
-Surface(Uint32 flags, int width, int height, int depth,
-            Uint32 Rmask, Uint32 Gmask, Uint32 Bmask, Uint32 Amask);
-Surface(SDL_RWops *src, int freesrc);
-Surface(const std::string &file);
-Surface(SDL_Surface *src, const SDL_PixelFormat *fmt, Uint32 flags);
-Surface(SDL_Surface *src, Uint32 pixel_format, Uint32 flags);
-```
 ##Audio
 |Method|SDL2 function|
 |------|-------------|
+|ctor|SDL_OpenAudioDevice*|
+|dtor|SDL_CloseAudioDevice|
 |clearQueued|SDL_ClearQueuedAudio|
 |getStatus|SDL_GetAudioDeviceStatus|
 |getQueuedSize|SDL_GetQueuedAudioSize|
@@ -172,7 +172,7 @@ Surface(SDL_Surface *src, Uint32 pixel_format, Uint32 flags);
 |queue|SDL_QueueAudio|
 |unlock|SDL_UnlockAudioDevice|
 
-Constructor:
+*)
 ```c++
 Audio(const char *device,
           bool iscapture,

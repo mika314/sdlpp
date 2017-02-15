@@ -24,6 +24,8 @@ namespace sdl
         throw Error(strm.str());
       }
     }
+    Init(const Init&) = delete;
+    Init &operator=(const Init&) = delete;
     ~Init()
     {
       SDL_Quit();
