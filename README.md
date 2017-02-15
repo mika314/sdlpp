@@ -3,7 +3,7 @@ Header only C++ wrapper for SDL2.
 
 [![C++ Wrapper for SDL2](https://img.youtube.com/vi/fD-bCQ20NRo/0.jpg)](https://www.youtube.com/watch?v=fD-bCQ20NRo)
 
-The library leverage RAII and error handling with exceptions.
+The library leverages RAII and error handling with exceptions.
 
 SDL2 code
 ```c++
@@ -183,3 +183,56 @@ Audio(const char *device,
 ```
 
 ##Event Handling
+Example code:
+```c++
+  auto done = false;
+  sdl::EventHandler e;
+  e.quit = [&done](const SDL_QuitEvent &)
+    {
+      done = true;
+    };
+  while (!done)
+  {
+    while (e.poll()) {}
+    // rendering
+  }
+
+```
+|SDL_Event::type|sdl::EventHandler member variable|
+|---------------|----------------------|
+|SDL_AUDIODEVICEADDED|audioDeviceAdded|
+|SDL_AUDIODEVICEREMOVED|audioDeviceRemoved|
+|SDL_CONTROLLERAXISMOTION|controllerAxisMotion|
+|SDL_CONTROLLERBUTTONDOWN|controllerButtonDown|
+|SDL_CONTROLLERBUTTONUP|controllerButtonUp|
+|SDL_CONTROLLERDEVICEADDED|controllerDeviceAdded|
+|SDL_CONTROLLERDEVICEREMOVED|controllerDeviceRemoved|
+|SDL_CONTROLLERDEVICEREMAPPED|controllerDeviceRemapped|
+|SDL_DOLLARGESTURE|dollarGesture|
+|SDL_DOLLARRECORD|dollarRecord|
+|SDL_DROPFILE|dropFile|
+|SDL_FINGERMOTION|fingerMotion|
+|SDL_FINGERDOWN|fingerDown|
+|SDL_FINGERUP|fingerUp|
+|SDL_KEYDOWN|keyDown|
+|SDL_KEYUP|keyUp|
+|SDL_JOYAXISMOTION|joyAxisMotion|
+|SDL_JOYBALLMOTION|joyBallMotion|
+|SDL_JOYHATMOTION|joyHatMotion|
+|SDL_JOYBUTTONDOWN|joyButtonDown|
+|SDL_JOYBUTTONUP|joyButtonUp|
+|SDL_JOYDEVICEADDED|joyDeviceAdded|
+|SDL_JOYDEVICEREMOVED|joyDeviceRemoved|
+|SDL_MOUSEMOTION|mouseMotion|
+|SDL_MOUSEBUTTONDOWN|mouseButtonDown|
+|SDL_MOUSEBUTTONUP|mouseButtonUp|
+|SDL_MOUSEWHEEL|mouseWheel|
+|SDL_MULTIGESTURE|multiGesture|
+|SDL_QUIT|quit|
+|SDL_SYSWMEVENT|sysWmEvent|
+|SDL_TEXTEDITING|textEditing|
+|SDL_TEXTINPUT|textInput|
+|SDL_USEREVENT|userEvent|
+|SDL_WINDOWEVENT|windowEvent|
+
+Function poll() internally calls SDL_PollEvent and function wait() calls SDL_WaintEvent() or SDL_WaitEventTimeout().
