@@ -113,6 +113,8 @@ Also I mapped functions to methods.
 |setTarget|SDL_SetRenderTarget|
 
 ##Texture
+|Method|SDL2 function|
+|------|-------------|
 |glBind|SDL_GL_BindTexture|
 |glUnbind|SDL_GL_UnbindTexture|
 |getAlphaMod|SDL_GetTextureAlphaMod|
@@ -133,6 +135,8 @@ Texture(SDL_Renderer *renderer, SDL_Surface *surface);
 ```
 
 ##Surface
+|Method|SDL2 function|
+|------|-------------|
 |setPalette|SDL_SetSurfacePalette|
 |lock|SDL_LockSurface|
 |unlock|SDL_UnlockSurface|
@@ -158,6 +162,8 @@ Surface(SDL_Surface *src, const SDL_PixelFormat *fmt, Uint32 flags);
 Surface(SDL_Surface *src, Uint32 pixel_format, Uint32 flags);
 ```
 ##Audio
+|Method|SDL2 function|
+|------|-------------|
 |clearQueued|SDL_ClearQueuedAudio|
 |getStatus|SDL_GetAudioDeviceStatus|
 |getQueuedSize|SDL_GetQueuedAudioSize|
