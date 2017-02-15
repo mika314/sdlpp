@@ -27,3 +27,6 @@
 *.exe
 *.out
 *.app
+*~
+/examples/pong/pong
+/examples/starfield/starfield
