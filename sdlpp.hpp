@@ -48,9 +48,21 @@ namespace sdl
     {}                                                  \
     X(const X&) = delete;                               \
     X&operator=(const X&) = delete;                     \
+    X&operator=(X&&x)                                   \
+      {                                                 \
+        handle = x.handle;                              \
+        x.handle = 0;                                   \
+        return *this;                                   \
+      }                                                 \
+    X(X&& x):                                           \
+      handle(x.handle)                                  \
+    {                                                   \
+      x.handle = 0;                                     \
+    }                                                   \
     ~X()                                                \
     {                                                   \
-      SDL_Destroy##X(handle);                           \
+      if (handle)                                       \
+        SDL_Destroy##X(handle);                         \
     }                                                   \
     SDL_##X *operator&()                                \
     {                                                   \
@@ -188,19 +200,29 @@ namespace sdl
   SDL_CLASS(Renderer);
 
 #undef SDL_CLASS_METHOD_LIST
-#define SDL_CLASS_METHOD_LIST                   \
-  METHOD(glBind, GL_BindTexture);               \
-  METHOD(glUnbind, GL_UnbindTexture);           \
-  METHOD(getAlphaMod, GetTextureAlphaMod);      \
-  METHOD(getBlendMode, GetTextureBlendMode);    \
-  METHOD(getColorMod, GetTextureColorMod);      \
-  METHOD(lock, LockTexture);                    \
-  METHOD(query, QueryTexture);                  \
-  METHOD(setAlphaMod, SetTextureAlphaMod);      \
-  METHOD(setBlendMode, SetTextureBlendMode);    \
-  METHOD(setColorMod, SetTextureColorMod);      \
-  METHOD(unlock, UnlockTexture);                \
-  METHOD(update, UpdateTexture);                \
+#define SDL_CLASS_METHOD_LIST                                   \
+  Texture(SDL_Renderer *renderer, SDL_Surface *surface):        \
+    handle(SDL_CreateTextureFromSurface(renderer, surface))     \
+  {                                                             \
+    if (!handle)                                                \
+    {                                                           \
+      std::ostringstream strm;                                  \
+      strm << "Texture::Texture(): " << SDL_GetError();         \
+      throw Error(strm.str());                                  \
+    }                                                           \
+  }                                                             \
+  METHOD(glBind, GL_BindTexture);                               \
+  METHOD(glUnbind, GL_UnbindTexture);                           \
+  METHOD(getAlphaMod, GetTextureAlphaMod);                      \
+  METHOD(getBlendMode, GetTextureBlendMode);                    \
+  METHOD(getColorMod, GetTextureColorMod);                      \
+  METHOD(lock, LockTexture);                                    \
+  METHOD(query, QueryTexture);                                  \
+  METHOD(setAlphaMod, SetTextureAlphaMod);                      \
+  METHOD(setBlendMode, SetTextureBlendMode);                    \
+  METHOD(setColorMod, SetTextureColorMod);                      \
+  METHOD(unlock, UnlockTexture);                                \
+  METHOD(update, UpdateTexture);                                \
   METHOD(updateYuv, UpdateYUVTexture);
   SDL_CLASS(Texture);
 
