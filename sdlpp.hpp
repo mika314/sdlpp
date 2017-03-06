@@ -351,10 +351,6 @@ namespace sdl
     {
       return handle;
     }
-    const SDL_AudioDeviceID operator&() const
-    {
-      return handle;
-    }
   private:
     SDL_AudioDeviceID handle;
     std::function<void(Uint8 *stream, int len)> callback;
