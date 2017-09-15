@@ -78,7 +78,7 @@ Also I mapped functions to methods.
 |updateSurface|SDL_UpdateWindowSurface|
 |updateSurfaceRects|SDL_UpdateWindowSurfaceRects|
 
-##Renderer
+## Renderer
 |Method|SDL2 function|
 |------|-------------|
 |ctor|SDL_CreateRenderer|
@@ -116,7 +116,7 @@ Also I mapped functions to methods.
 |setDrawColor|SDL_SetRenderDrawColor|
 |setTarget|SDL_SetRenderTarget|
 
-##Texture
+## Texture
 |Method|SDL2 function|
 |------|-------------|
 |ctor|SDL_CreateTexture|
@@ -136,7 +136,7 @@ Also I mapped functions to methods.
 |update|SDL_UpdateTexture|
 |updateYuv|SDL_UpdateYUVTexture|
 
-##Surface
+## Surface
 |Method|SDL2 function|
 |------|-------------|
 |ctor|SDL_CreateRGBSurface|
@@ -159,7 +159,7 @@ Also I mapped functions to methods.
 |softStretch|SDL_SoftStretch|
 |blitScaled|SDL_BlitScaled|
 
-##Audio
+## Audio
 |Method|SDL2 function|
 |------|-------------|
 |ctor|SDL_OpenAudioDevice*|
@@ -182,7 +182,7 @@ Audio(const char *device,
           std::function<void(Uint8 *stream, int len)> callback = nullptr);
 ```
 
-##Event Handling
+## Event Handling
 Example code:
 ```c++
   auto done = false;
@@ -237,6 +237,6 @@ Example code:
 
 Function poll() internally calls SDL_PollEvent and function wait() calls SDL_WaintEvent() or SDL_WaitEventTimeout().
 
-##Examples
+## Examples
 
 Go in the example directory examples/pong or examples/starfield and run make to build.
