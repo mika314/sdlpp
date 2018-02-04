@@ -280,8 +280,8 @@ namespace sdl
     Surface(const Surface &) = delete;
     Surface &operator=(const Surface &) = delete;
     ~Surface() { SDL_FreeSurface(handle); }
-    SDL_Surface *operator&() { return handle; }
-    const SDL_Surface *operator&() const { return handle; }
+    SDL_Surface *get() { return handle; }
+    const SDL_Surface *get() const { return handle; }
   private:
     SDL_Surface *handle;
 
@@ -343,7 +343,7 @@ namespace sdl
     Audio(const Audio &) = delete;
     Audio &operator=(const Audio &) = delete;
     ~Audio() { SDL_CloseAudioDevice(handle); }
-    SDL_AudioDeviceID operator&() { return handle; }
+    SDL_AudioDeviceID get() { return handle; }
   private:
     SDL_AudioDeviceID handle;
     std::function<void(Uint8 *stream, int len)> callback;
