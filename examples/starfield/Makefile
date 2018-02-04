@@ -1,1 +1,1 @@
-/home/anton/prj/sdlpp/examples/Makefile.template
+../Makefile.template

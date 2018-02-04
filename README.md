@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/antonte/sdlpp.svg?branch=master)](https://travis-ci.org/antonte/sdlpp)
+
 # sdlpp
 Header only C++ wrapper for SDL2.
 

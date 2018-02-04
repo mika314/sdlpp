@@ -132,6 +132,49 @@ namespace sdl
     return callSdl(SDL_##Y, handle, args...);              \
   }
 
+#if SDL_COMPILEDVERSION < 2004
+#define SDL_CLASS_METHOD_LIST                    \
+  METHOD(glCreateContext, GL_CreateContext)      \
+  METHOD(glGetDrawableSize, GL_GetDrawableSize)  \
+  METHOD(glMakeCurrent, GL_MakeCurrent)          \
+  METHOD(glSwap, GL_SwapWindow)                  \
+  METHOD(getBrightness, GetWindowBrightness)     \
+  METHOD(getData, GetWindowData)                 \
+  METHOD(getDisplayIndex, GetWindowDisplayIndex) \
+  METHOD(getDisplayMode, GetWindowDisplayMode)   \
+  METHOD(getFlags, GetWindowFlags)               \
+  METHOD(getGammaRamp, GetWindowGammaRamp)       \
+  METHOD(getGrab, GetWindowGrab)                 \
+  METHOD(getID, GetWindowID)                     \
+  METHOD(getMaximumSize, GetWindowMaximumSize)   \
+  METHOD(getMinimumSize, GetWindowMinimumSize)   \
+  METHOD(getPixelFormat, GetWindowPixelFormat)   \
+  METHOD(getPosition, GetWindowPosition)         \
+  METHOD(getSize, GetWindowSize)                 \
+  METHOD(getSurface, GetWindowSurface)           \
+  METHOD(getTitle, GetWindowTitle)               \
+  METHOD(hide, HideWindow)                       \
+  METHOD(maximize, MaximizeWindow)               \
+  METHOD(minimize, MinimizeWindow)               \
+  METHOD(raise, RaiseWindow)                     \
+  METHOD(restore, RestoreWindow)                 \
+  METHOD(setBordered, SetWindowBordered)         \
+  METHOD(setBrightness, SetWindowBrightness)     \
+  METHOD(setData, SetWindowData)                 \
+  METHOD(setDisplayMode, SetWindowDisplayMode)   \
+  METHOD(setFullscreen, SetWindowFullscreen)     \
+  METHOD(setGammaRamp, SetWindowGammaRamp)       \
+  METHOD(setGrab, SetWindowGrab)                 \
+  METHOD(setIcon, SetWindowIcon)                 \
+  METHOD(setMaximumSize, SetWindowMaximumSize)   \
+  METHOD(setMinimumSize, SetWindowMinimumSize)   \
+  METHOD(setPosition, SetWindowPosition)         \
+  METHOD(setSize, SetWindowSize)                 \
+  METHOD(setTitle, SetWindowTitle)               \
+  METHOD(show, ShowWindow)                       \
+  METHOD(updateSurface, UpdateWindowSurface)     \
+  METHOD(updateSurfaceRects, UpdateWindowSurfaceRects)
+#else
 #define SDL_CLASS_METHOD_LIST                    \
   METHOD(glCreateContext, GL_CreateContext)      \
   METHOD(glGetDrawableSize, GL_GetDrawableSize)  \
@@ -174,9 +217,48 @@ namespace sdl
   METHOD(show, ShowWindow)                       \
   METHOD(updateSurface, UpdateWindowSurface)     \
   METHOD(updateSurfaceRects, UpdateWindowSurfaceRects)
+#endif
 
   SDL_CLASS(Window);
 #undef SDL_CLASS_METHOD_LIST
+
+#if SDL_COMPILEDVERSION < 2004
+#define SDL_CLASS_METHOD_LIST                      \
+  METHOD(getDrawBlendMode, GetRenderDrawBlendMode) \
+  METHOD(getDrawColor, GetRenderDrawColor)         \
+  METHOD(getDriverInfo, GetRenderDriverInfo)       \
+  METHOD(getTarget, GetRenderTarget)               \
+  METHOD(getInfo, GetRendererInfo)                 \
+  METHOD(getOutputSize, GetRendererOutputSize)     \
+  METHOD(clear, RenderClear)                       \
+  METHOD(copy, RenderCopy)                         \
+  METHOD(copyEx, RenderCopyEx)                     \
+  METHOD(drawLine, RenderDrawLine)                 \
+  METHOD(drawLines, RenderDrawLines)               \
+  METHOD(drawPoint, RenderDrawPoint)               \
+  METHOD(drawPoints, RenderDrawPoints)             \
+  METHOD(drawRect, RenderDrawRect)                 \
+  METHOD(drawRects, RenderDrawRects)               \
+  METHOD(fillRect, RenderFillRect)                 \
+  METHOD(fillRects, RenderFillRects)               \
+  METHOD(getClipRect, RenderGetClipRect)           \
+  METHOD(getLogicalSize, RenderGetLogicalSize)     \
+  METHOD(getScale, RenderGetScale)                 \
+  METHOD(getViewport, RenderGetViewport)           \
+  METHOD(present, RenderPresent)                   \
+  METHOD(readPixels, RenderReadPixels)             \
+  METHOD(setClipRect, RenderSetClipRect)           \
+  METHOD(setLogicalSize, RenderSetLogicalSize)     \
+  METHOD(setScale, RenderSetScale)                 \
+  METHOD(setViewport, RenderSetViewport)           \
+  METHOD(targetSupported, RenderTargetSupported)   \
+  METHOD(setDrawBlendMode, SetRenderDrawBlendMode) \
+  METHOD(setDrawColor, SetRenderDrawColor)         \
+  METHOD(setTarget, SetRenderTarget)
+  SDL_CLASS(Renderer);
+
+#else
+
 #define SDL_CLASS_METHOD_LIST                      \
   METHOD(getDrawBlendMode, GetRenderDrawBlendMode) \
   METHOD(getDrawColor, GetRenderDrawColor)         \
@@ -211,6 +293,7 @@ namespace sdl
   METHOD(setDrawColor, SetRenderDrawColor)         \
   METHOD(setTarget, SetRenderTarget)
   SDL_CLASS(Renderer);
+#endif
 
 #undef SDL_CLASS_METHOD_LIST
 #define SDL_CLASS_METHOD_LIST                                 \
@@ -353,12 +436,14 @@ namespace sdl
     }
 
   public:
+#if SDL_COMPILEDVERSION >= 2004
     METHOD(clearQueued, ClearQueuedAudio)
-    METHOD(getStatus, GetAudioDeviceStatus)
     METHOD(getQueuedSize, GetQueuedAudioSize)
+    METHOD(queue, QueueAudio)
+#endif
+    METHOD(getStatus, GetAudioDeviceStatus)
     METHOD(lock, LockAudioDevice)
     METHOD(pause, PauseAudioDevice)
-    METHOD(queue, QueueAudio)
     METHOD(unlock, UnlockAudioDevice)
   };
   class EventHandler
@@ -392,6 +477,41 @@ namespace sdl
         throw Error(strm.str());
       }
     }
+#if SDL_COMPILEDVERSION < 2004
+#define SDL_EVENTS                                                        \
+  EVENT(SDL_CONTROLLERAXISMOTION, controllerAxisMotion, caxis);           \
+  EVENT(SDL_CONTROLLERBUTTONDOWN, controllerButtonDown, cbutton);         \
+  EVENT(SDL_CONTROLLERBUTTONUP, controllerButtonUp, cbutton);             \
+  EVENT(SDL_CONTROLLERDEVICEADDED, controllerDeviceAdded, cdevice);       \
+  EVENT(SDL_CONTROLLERDEVICEREMOVED, controllerDeviceRemoved, cdevice);   \
+  EVENT(SDL_CONTROLLERDEVICEREMAPPED, controllerDeviceRemapped, cdevice); \
+  EVENT(SDL_DOLLARGESTURE, dollarGesture, dgesture);                      \
+  EVENT(SDL_DOLLARRECORD, dollarRecord, dgesture);                        \
+  EVENT(SDL_DROPFILE, dropFile, drop);                                    \
+  EVENT(SDL_FINGERMOTION, fingerMotion, tfinger);                         \
+  EVENT(SDL_FINGERDOWN, fingerDown, tfinger);                             \
+  EVENT(SDL_FINGERUP, fingerUp, tfinger);                                 \
+  EVENT(SDL_KEYDOWN, keyDown, key);                                       \
+  EVENT(SDL_KEYUP, keyUp, key);                                           \
+  EVENT(SDL_JOYAXISMOTION, joyAxisMotion, jaxis);                         \
+  EVENT(SDL_JOYBALLMOTION, joyBallMotion, jball);                         \
+  EVENT(SDL_JOYHATMOTION, joyHatMotion, jhat);                            \
+  EVENT(SDL_JOYBUTTONDOWN, joyButtonDown, jbutton);                       \
+  EVENT(SDL_JOYBUTTONUP, joyButtonUp, jbutton);                           \
+  EVENT(SDL_JOYDEVICEADDED, joyDeviceAdded, jdevice);                     \
+  EVENT(SDL_JOYDEVICEREMOVED, joyDeviceRemoved, jdevice);                 \
+  EVENT(SDL_MOUSEMOTION, mouseMotion, motion);                            \
+  EVENT(SDL_MOUSEBUTTONDOWN, mouseButtonDown, button);                    \
+  EVENT(SDL_MOUSEBUTTONUP, mouseButtonUp, button);                        \
+  EVENT(SDL_MOUSEWHEEL, mouseWheel, wheel);                               \
+  EVENT(SDL_MULTIGESTURE, multiGesture, mgesture);                        \
+  EVENT(SDL_QUIT, quit, quit);                                            \
+  EVENT(SDL_SYSWMEVENT, sysWmEvent, syswm);                               \
+  EVENT(SDL_TEXTEDITING, textEditing, edit);                              \
+  EVENT(SDL_TEXTINPUT, textInput, text);                                  \
+  EVENT(SDL_USEREVENT, userEvent, user);                                  \
+  EVENT(SDL_WINDOWEVENT, windowEvent, window);
+#else
 #define SDL_EVENTS                                                        \
   EVENT(SDL_AUDIODEVICEADDED, audioDeviceAdded, adevice);                 \
   EVENT(SDL_AUDIODEVICEREMOVED, audioDeviceRemoved, adevice);             \
@@ -427,6 +547,7 @@ namespace sdl
   EVENT(SDL_TEXTINPUT, textInput, text);                                  \
   EVENT(SDL_USEREVENT, userEvent, user);                                  \
   EVENT(SDL_WINDOWEVENT, windowEvent, window);
+#endif
 
 #define EVENT(x, y, z) std::function<void(const decltype(SDL_Event::z) &)> y
     SDL_EVENTS
