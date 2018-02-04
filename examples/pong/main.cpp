@@ -8,7 +8,7 @@ int main(int argc, char *argv[])
   const auto Height = 720;
   Window w("Graphs", 63, 126, Width, Height, SDL_WINDOW_BORDERLESS);
   SDL_SetHint(SDL_HINT_RENDER_VSYNC, "1");
-  Renderer r(&w, -1, 0);
+  Renderer r(w.get(), -1, 0);
   auto currentTick = SDL_GetTicks() / 17;
   auto playerY = 0;
   auto aiY = 0;

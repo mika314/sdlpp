@@ -13,7 +13,7 @@ int main(int argc, char **argv)
   sdl::Init init(SDL_INIT_EVERYTHING);
   sdl::Window w("Starfiled", 65, 126, 1280, 720, SDL_WINDOW_BORDERLESS);
   SDL_SetHint(SDL_HINT_RENDER_VSYNC, "1");
-  sdl::Renderer r(&w, -1, 0);
+  sdl::Renderer r(w.get(), -1, 0);
   auto done = false;
   sdl::EventHandler e;
   e.quit = [&done](const SDL_QuitEvent &)
