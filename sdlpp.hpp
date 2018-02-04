@@ -23,7 +23,7 @@ SOFTWARE.
 */
 
 #pragma once
-#include <SDL2/SDL.h>
+#include <SDL.h>
 #include <functional>
 #include <sstream>
 
@@ -357,7 +357,8 @@ namespace sdl
     METHOD(getStatus, GetAudioDeviceStatus)
     METHOD(getQueuedSize, GetQueuedAudioSize)
     METHOD(lock, LockAudioDevice)
-    METHOD(pause, PauseAudioDevice)    METHOD(queue, QueueAudio)
+    METHOD(pause, PauseAudioDevice)
+    METHOD(queue, QueueAudio)
     METHOD(unlock, UnlockAudioDevice)
   };
   class EventHandler
