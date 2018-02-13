@@ -23,7 +23,13 @@ SOFTWARE.
 */
 
 #pragma once
+
+#define USE_SDLGFX
+
 #include <SDL.h>
+#ifdef USE_SDLGFX
+#include <SDL2_gfxPrimitives.h>
+#endif
 #include <functional>
 #include <sstream>
 
@@ -125,12 +131,13 @@ namespace sdl
     f(args...);
   }
 
-#define METHOD(X, Y)                                       \
+#define METHOD2(X, Y)                                      \
   template <typename... Args>                              \
-  auto X(Args... args)->decltype(SDL_##Y(handle, args...)) \
+  auto X(Args... args)->decltype(Y(handle, args...))       \
   {                                                        \
-    return callSdl(SDL_##Y, handle, args...);              \
+    return callSdl(Y, handle, args...);                    \
   }
+#define METHOD(X, Y) METHOD2(X, SDL_##Y)
 
 #define SDL_CLASS_METHOD_LIST_TMP                \
   METHOD(glCreateContext, GL_CreateContext)      \
@@ -219,13 +226,83 @@ namespace sdl
   METHOD(setDrawColor, SetRenderDrawColor)         \
   METHOD(setTarget, SetRenderTarget)
 
+#ifdef USE_SDLGFX
+  #define SDLGFX_METHOD_LIST                       \
+    METHOD2(pixelColor, ::pixelColor) \
+    METHOD2(pixelRGBA, ::pixelRGBA) \
+    METHOD2(hlineColor, ::hlineColor) \
+    METHOD2(hlineRGBA, ::hlineRGBA) \
+    METHOD2(vlineColor, ::vlineColor) \
+    METHOD2(vlineRGBA, ::vlineRGBA) \
+    METHOD2(rectangleColor, ::rectangleColor) \
+    METHOD2(rectangleRGBA, ::rectangleRGBA) \
+    METHOD2(roundedRectangleColor, ::roundedRectangleColor) \
+    METHOD2(roundedRectangleRGBA, ::roundedRectangleRGBA) \
+    METHOD2(boxColor, ::boxColor) \
+    METHOD2(boxRGBA, ::boxRGBA) \
+    METHOD2(roundedBoxColor, ::roundedBoxColor) \
+    METHOD2(roundedBoxRGBA, ::roundedBoxRGBA) \
+    METHOD2(lineColor, ::lineColor) \
+    METHOD2(lineRGBA, ::lineRGBA) \
+    METHOD2(aalineColor, ::aalineColor) \
+    METHOD2(aalineRGBA, ::aalineRGBA) \
+    METHOD2(thickLineColor, ::thickLineColor) \
+    METHOD2(thickLineRGBA, ::thickLineRGBA) \
+    METHOD2(circleColor, ::circleColor) \
+    METHOD2(circleRGBA, ::circleRGBA) \
+    METHOD2(arcColor, ::arcColor) \
+    METHOD2(arcRGBA, ::arcRGBA) \
+    METHOD2(aacircleColor, ::aacircleColor) \
+    METHOD2(aacircleRGBA, ::aacircleRGBA) \
+    METHOD2(filledCircleColor, ::filledCircleColor) \
+    METHOD2(filledCircleRGBA, ::filledCircleRGBA) \
+    METHOD2(ellipseColor, ::ellipseColor) \
+    METHOD2(ellipseRGBA, ::ellipseRGBA) \
+    METHOD2(aaellipseColor, ::aaellipseColor) \
+    METHOD2(aaellipseRGBA, ::aaellipseRGBA) \
+    METHOD2(filledEllipseColor, ::filledEllipseColor) \
+    METHOD2(filledEllipseRGBA, ::filledEllipseRGBA) \
+    METHOD2(pieColor, ::pieColor) \
+    METHOD2(pieRGBA, ::pieRGBA) \
+    METHOD2(filledPieColor, ::filledPieColor) \
+    METHOD2(filledPieRGBA, ::filledPieRGBA) \
+    METHOD2(trigonColor, ::trigonColor) \
+    METHOD2(trigonRGBA, ::trigonRGBA) \
+    METHOD2(aatrigonColor, ::aatrigonColor) \
+    METHOD2(aatrigonRGBA, ::aatrigonRGBA) \
+    METHOD2(filledTrigonColor, ::filledTrigonColor) \
+    METHOD2(filledTrigonRGBA, ::filledTrigonRGBA) \
+    METHOD2(polygonColor, ::polygonColor) \
+    METHOD2(polygonRGBA, ::polygonRGBA) \
+    METHOD2(aapolygonColor, ::aapolygonColor) \
+    METHOD2(aapolygonRGBA, ::aapolygonRGBA) \
+    METHOD2(filledPolygonColor, ::filledPolygonColor) \
+    METHOD2(filledPolygonRGBA, ::filledPolygonRGBA) \
+    METHOD2(texturedPolygon, ::texturedPolygon) \
+    METHOD2(bezierColor, ::bezierColor) \
+    METHOD2(bezierRGBA, ::bezierRGBA) \
+    METHOD2(characterColor, ::characterColor) \
+    METHOD2(characterRGBA, ::characterRGBA) \
+    METHOD2(stringColor, ::stringColor) \
+    METHOD2(stringRGBA, ::stringRGBA) \
+    int stringColor(Sint16 x, Sint16 y, const std::string& str, Uint32 color) \
+      { return stringColor(x,y, str.c_str(), color); } \
+    int stringRGBA(Sint16 x, Sint16 y, const std::string& str, Uint8 r, Uint8 g, Uint8 b, Uint8 a) \
+      { return stringRGBA(x,y, str.c_str(), r,g,b,a); }
+
+#else
+  #define SDLGFX_METHOD_LIST
+#endif
+
 #if SDL_COMPILEDVERSION < 2004
 #define SDL_CLASS_METHOD_LIST                      \
-  SDL_CLASS_METHOD_LIST_TMP
+  SDL_CLASS_METHOD_LIST_TMP                        \
+  SDLGFX_METHOD_LIST                               \
   SDL_CLASS(Renderer);
 #else
 #define SDL_CLASS_METHOD_LIST                      \
   SDL_CLASS_METHOD_LIST_TMP                        \
+  SDLGFX_METHOD_LIST                               \
   METHOD(isClipEnabled, RenderIsClipEnabled)
   SDL_CLASS(Renderer);
 #endif
