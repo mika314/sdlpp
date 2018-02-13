@@ -73,10 +73,10 @@ namespace sdl
     X &operator=(X &&x)                              \
     {                                                \
       handle = x.handle;                             \
-      x.handle = 0;                                  \
+      x.handle = nullptr;                            \
       return *this;                                  \
     }                                                \
-    X(X &&x) : handle(x.handle) { x.handle = 0; }    \
+    X(X &&x) : handle(x.handle) { x.handle = nullptr; }    \
     ~X()                                             \
     {                                                \
       if (handle)                                    \
