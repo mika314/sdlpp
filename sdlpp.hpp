@@ -298,7 +298,7 @@ namespace sdl
 #if SDL_COMPILEDVERSION < 2004
 #define SDL_CLASS_METHOD_LIST                      \
   SDL_CLASS_METHOD_LIST_TMP                        \
-  SDLGFX_METHOD_LIST                               \
+  SDLGFX_METHOD_LIST
   SDL_CLASS(Renderer);
 #else
 #define SDL_CLASS_METHOD_LIST                      \
