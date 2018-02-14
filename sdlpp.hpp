@@ -24,7 +24,8 @@ SOFTWARE.
 
 #pragma once
 
-#define USE_SDLGFX
+// enable this if you want to use the higher-level SDL2_gfx features
+//#define USE_SDLGFX
 
 #include <SDL.h>
 #ifdef USE_SDLGFX
