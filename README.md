@@ -7,6 +7,9 @@ Header only C++ wrapper for SDL2.
 
 The library leverages RAII and error handling with exceptions.
 
+Optional support for SDL2_gfx's graphic primitives is available. To turn it on, uncomment the
+`#define USE_SDLGFX` directive in `sdlpp.hpp`.
+
 SDL2 code
 ```c++
   int res = SDL_Init(SDL_INIT_EVERYTHING);
@@ -117,6 +120,67 @@ Also I mapped functions to methods.
 |setDrawBlendMode|SDL_SetRenderDrawBlendMode|
 |setDrawColor|SDL_SetRenderDrawColor|
 |setTarget|SDL_SetRenderTarget|
+
+## Renderer if SDL2_gfx-support is enabled
+|Method|SDL2_gfx function|
+|------|-----------------|
+|pixelColor|pixelColor|
+|pixelRGBA|pixelRGBA|
+|hlineColor|hlineColor|
+|hlineRGBA|hlineRGBA|
+|vlineColor|vlineColor|
+|vlineRGBA|vlineRGBA|
+|rectangleColor|rectangleColor|
+|rectangleRGBA|rectangleRGBA|
+|roundedRectangleColor|roundedRectangleColor|
+|roundedRectangleRGBA|roundedRectangleRGBA|
+|boxColor|boxColor|
+|boxRGBA|boxRGBA|
+|roundedBoxColor|roundedBoxColor|
+|roundedBoxRGBA|roundedBoxRGBA|
+|lineColor|lineColor|
+|lineRGBA|lineRGBA|
+|aalineColor|aalineColor|
+|aalineRGBA|aalineRGBA|
+|thickLineColor|thickLineColor|
+|thickLineRGBA|thickLineRGBA|
+|circleColor|circleColor|
+|circleRGBA|circleRGBA|
+|arcColor|arcColor|
+|arcRGBA|arcRGBA|
+|aacircleColor|aacircleColor|
+|aacircleRGBA|aacircleRGBA|
+|filledCircleColor|filledCircleColor|
+|filledCircleRGBA|filledCircleRGBA|
+|ellipseColor|ellipseColor|
+|ellipseRGBA|ellipseRGBA|
+|aaellipseColor|aaellipseColor|
+|aaellipseRGBA|aaellipseRGBA|
+|filledEllipseColor|filledEllipseColor|
+|filledEllipseRGBA|filledEllipseRGBA|
+|pieColor|pieColor|
+|pieRGBA|pieRGBA|
+|filledPieColor|filledPieColor|
+|filledPieRGBA|filledPieRGBA|
+|trigonColor|trigonColor|
+|trigonRGBA|trigonRGBA|
+|aatrigonColor|aatrigonColor|
+|aatrigonRGBA|aatrigonRGBA|
+|filledTrigonColor|filledTrigonColor|
+|filledTrigonRGBA|filledTrigonRGBA|
+|polygonColor|polygonColor|
+|polygonRGBA|polygonRGBA|
+|aapolygonColor|aapolygonColor|
+|aapolygonRGBA|aapolygonRGBA|
+|filledPolygonColor|filledPolygonColor|
+|filledPolygonRGBA|filledPolygonRGBA|
+|texturedPolygon|texturedPolygon|
+|bezierColor|bezierColor|
+|bezierRGBA|bezierRGBA|
+|characterColor|characterColor|
+|characterRGBA|characterRGBA|
+|stringColor|stringColor|
+|stringRGBA|stringRGBA|
 
 ## Texture
 |Method|SDL2 function|
