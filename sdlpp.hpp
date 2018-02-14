@@ -67,16 +67,16 @@ namespace sdl
         throw Error(strm.str());                     \
       }                                              \
     }                                                \
-    X(SDL_##X *handle) : handle(handle) {}           \
+    X(SDL_##X *handle_) : handle(handle_) {}         \
     X(const X &) = delete;                           \
     X &operator=(const X &) = delete;                \
     X &operator=(X &&x)                              \
     {                                                \
       handle = x.handle;                             \
-      x.handle = 0;                                  \
+      x.handle = nullptr;                            \
       return *this;                                  \
     }                                                \
-    X(X &&x) : handle(x.handle) { x.handle = 0; }    \
+    X(X &&x) : handle(x.handle) { x.handle = nullptr; }    \
     ~X()                                             \
     {                                                \
       if (handle)                                    \
@@ -359,7 +359,7 @@ namespace sdl
     {
       checkErrors();
     }
-    Surface(SDL_Surface *handle) : handle(handle) {}
+    Surface(SDL_Surface *handle_) : handle(handle_) {}
     Surface(const Surface &) = delete;
     Surface &operator=(const Surface &) = delete;
     ~Surface() { SDL_FreeSurface(handle); }
@@ -393,8 +393,8 @@ namespace sdl
           const SDL_AudioSpec *desired,
           SDL_AudioSpec *obtained,
           int allowed_changes,
-          std::function<void(Uint8 *stream, int len)> callback = nullptr)
-      : callback(callback)
+          std::function<void(Uint8 *stream, int len)> callback_ = nullptr)
+      : callback(callback_)
     {
       if (desired)
       {
@@ -422,7 +422,7 @@ namespace sdl
         throw Error(strm.str());
       }
     }
-    Audio(SDL_AudioDeviceID handle) : handle(handle) {}
+    Audio(SDL_AudioDeviceID handle_) : handle(handle_) {}
     Audio(const Audio &) = delete;
     Audio &operator=(const Audio &) = delete;
     ~Audio() { SDL_CloseAudioDevice(handle); }
