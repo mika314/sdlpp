@@ -372,12 +372,16 @@ namespace sdl
     {
       checkErrors();
     }
-    Surface(SDL_Surface *handle_) : handle(handle_) {}
+    Surface(SDL_Surface *handle_) : handle(handle_)
+    {
+      checkErrors();
+    }
     Surface(const Surface &) = delete;
     Surface &operator=(const Surface &) = delete;
     ~Surface() { SDL_FreeSurface(handle); }
     SDL_Surface *get() { return handle; }
     const SDL_Surface *get() const { return handle; }
+
   private:
     SDL_Surface *handle;
 
@@ -440,6 +444,7 @@ namespace sdl
     Audio &operator=(const Audio &) = delete;
     ~Audio() { SDL_CloseAudioDevice(handle); }
     SDL_AudioDeviceID get() { return handle; }
+
   private:
     SDL_AudioDeviceID handle;
     std::function<void(Uint8 *stream, int len)> callback;
@@ -551,4 +556,4 @@ namespace sdl
       }
     }
   };
-}
+} // namespace sdl
