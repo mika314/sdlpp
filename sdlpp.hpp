@@ -482,7 +482,7 @@ namespace sdl
     {
       SDL_Event e;
       int res;
-      if (timeout >= 0)
+      if (timeout == -1)
         res = SDL_WaitEvent(&e);
       else
         res = SDL_WaitEventTimeout(&e, timeout);
