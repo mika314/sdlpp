@@ -400,6 +400,23 @@ namespace sdl
     METHOD(blit, BlitSurface)
     METHOD(softStretch, SoftStretch)
     METHOD(blitScaled, BlitScaled)
+
+    class
+#if __has_cpp_attribute(nodiscard)
+    [[nodiscard]]
+#endif
+    Lock {
+      public:
+        explicit Lock(Surface& s) : s(s) {
+          if (SDL_MUSTLOCK(s.get())) s.lock();
+        }
+        ~Lock() {
+          if (SDL_MUSTLOCK(s.get())) s.unlock();
+        };
+
+      private:
+        Surface& s;
+    };
   };
 
   class Audio

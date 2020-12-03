@@ -211,8 +211,8 @@ Also I mapped functions to methods.
 |ctor|SDL_ConvertSurface|
 |dtor|SDL_FreeSurface|
 |setPalette|SDL_SetSurfacePalette|
-|lock|SDL_LockSurface|
-|unlock|SDL_UnlockSurface|
+|lock \*|SDL_LockSurface|
+|unlock \*|SDL_UnlockSurface|
 |setColorKey|SDL_SetColorKey|
 |getColorKey|SDL_GetColorKey|
 |setColorMode|SDL_SetSurfaceColorMod|
@@ -224,6 +224,8 @@ Also I mapped functions to methods.
 |blit|SDL_BlitSurface|
 |softStretch|SDL_SoftStretch|
 |blitScaled|SDL_BlitScaled|
+
+\* Consider `sdl::Surface::Lock` RAII object instead.
 
 ## Audio
 |Method|SDL2 function|
