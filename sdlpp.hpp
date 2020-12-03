@@ -381,6 +381,8 @@ namespace sdl
     ~Surface() { SDL_FreeSurface(handle); }
     SDL_Surface *get() { return handle; }
     const SDL_Surface *get() const { return handle; }
+    SDL_Surface *operator->() { return handle; }
+    const SDL_Surface *operator->() const { return handle; }
 
   private:
     SDL_Surface *handle;
