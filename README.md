@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/antonte/sdlpp.svg?branch=master)](https://travis-ci.org/mika314/sdlpp)
+[![Build Status](https://travis-ci.org/mika314/sdlpp.svg?branch=master)](https://travis-ci.org/mika314/sdlpp)
 
 # sdlpp
 Header only C++ wrapper for SDL2.
