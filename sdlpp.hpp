@@ -1,7 +1,7 @@
 /*
 This source file is part of sdlpp (C++ wrapper for SDL2)
 
-Copyright (c) 2017 Anton Te
+Copyright (c) 2022 Mika Pi
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -497,7 +497,7 @@ namespace sdl
       else
         return false;
     }
-    void wait(int timeout = -1)
+    bool wait(int timeout = -1)
     {
       SDL_Event e;
       int res;
@@ -506,13 +506,12 @@ namespace sdl
       else
         res = SDL_WaitEventTimeout(&e, timeout);
       if (res)
-        handleEvent(e);
-      else
       {
-        std::ostringstream strm;
-        strm << "EventHandler::wait(): " << SDL_GetError();
-        throw Error(strm.str());
+        handleEvent(e);
+        return true;
       }
+      else
+        return false;
     }
 #define SDL_EVENTS_TMP                                                    \
   EVENT(SDL_CONTROLLERAXISMOTION, controllerAxisMotion, caxis);           \
