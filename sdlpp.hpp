@@ -486,12 +486,15 @@ namespace sdl
   class EventHandler
   {
   public:
+    inline SDL_Event* get() {
+      return &e;
+    }
+
     bool poll()
     {
-      SDL_Event e;
       if (SDL_PollEvent(&e))
       {
-        handleEvent(e);
+        handleEvent();
         return true;
       }
       else
@@ -499,7 +502,6 @@ namespace sdl
     }
     bool wait(int timeout = -1)
     {
-      SDL_Event e;
       int res;
       if (timeout == -1)
         res = SDL_WaitEvent(&e);
@@ -507,7 +509,7 @@ namespace sdl
         res = SDL_WaitEventTimeout(&e, timeout);
       if (res)
       {
-        handleEvent(e);
+        handleEvent();
         return true;
       }
       else
@@ -559,7 +561,8 @@ namespace sdl
     SDL_EVENTS
 #undef EVENT
   private:
-    void handleEvent(const SDL_Event &e)
+    SDL_Event e;
+    void handleEvent()
     {
       switch (e.type)
       {
