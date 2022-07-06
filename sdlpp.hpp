@@ -414,7 +414,7 @@ namespace sdl
         }
         ~Lock() {
           if (SDL_MUSTLOCK(s.get())) s.unlock();
-        };
+        }
 
       private:
         Surface& s;
