@@ -31,6 +31,7 @@ SOFTWARE.
 #ifdef USE_SDLGFX
 #include <SDL2_gfxPrimitives.h>
 #endif
+#include <filesystem>
 #include <functional>
 #include <sstream>
 
@@ -577,4 +578,12 @@ namespace sdl
       }
     }
   };
+
+  std::filesystem::path get_base_path()
+  {
+    using deleter = decltype([](void *ptr) { SDL_free(ptr); });
+    auto ptr = std::unique_ptr<char[], deleter>(SDL_GetBasePath());
+    return std::filesystem::path(reinterpret_cast<char8_t const *>(ptr.get()),
+                                 std::filesystem::path::native_format);
+  }
 } // namespace sdl
