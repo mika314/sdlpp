@@ -579,7 +579,7 @@ namespace sdl
     }
   };
 
-  std::filesystem::path get_base_path()
+  inline std::filesystem::path get_base_path()
   {
     using deleter = decltype([](void *ptr) { SDL_free(ptr); });
     auto ptr = std::unique_ptr<char[], deleter>(SDL_GetBasePath());
