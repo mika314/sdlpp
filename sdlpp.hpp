@@ -490,7 +490,10 @@ namespace sdl
     inline SDL_Event* get() {
       return &e;
     }
-
+    void setCallback(const std::function<bool(SDL_Event)>& callback_)
+    {
+      callback = callback_;
+    }
     bool poll()
     {
       if (SDL_PollEvent(&e))
@@ -563,8 +566,18 @@ namespace sdl
 #undef EVENT
   private:
     SDL_Event e;
+    std::function<bool(SDL_Event)> callback;
+    
     void handleEvent()
     {
+      if (callback)
+      {
+        if (callback(e))
+        {
+          //consider handled
+          return;
+        }
+      }
       switch (e.type)
       {
 #define EVENT(x, y, z) \
