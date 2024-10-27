@@ -378,7 +378,14 @@ namespace sdl
       checkErrors();
     }
     Surface(const Surface &) = delete;
+    Surface(Surface &&x) : handle(x.handle) { x.handle = nullptr; }
     Surface &operator=(const Surface &) = delete;
+    Surface &operator=(Surface &&x)
+    {
+      handle = x.handle;
+      x.handle = nullptr;
+      return *this;
+    }
     ~Surface() { SDL_FreeSurface(handle); }
     SDL_Surface *get() { return handle; }
     const SDL_Surface *get() const { return handle; }
